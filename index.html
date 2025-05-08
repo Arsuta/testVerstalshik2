@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Text Effect</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            background: #1a1a1a;
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .text-effect {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .text-effect__svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .text-content {
+            font-family: Arial, sans-serif;
+            font-size: 90px;
+            font-weight: bold;
+            fill: #fff;
+        }
+
+        .video-overlay {
+            fill: rgba(0, 0, 0, 0.1);
+        }
+
+        .text-effect__svg--desktop {
+            display: block;
+        }
+
+        .text-effect__svg--mobile {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .text-effect {
+                height: 100vh;
+                position: fixed;
+                top: 0;
+                left: 0;
+                display: flex;
+                align-items: flex-start;
+                justify-content: flex-start;
+            }
+            
+            .text-content {
+                font-size: 15vh;
+            }
+
+            .text-effect__svg--desktop {
+                display: none;
+            }
+
+            .text-effect__svg--mobile {
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: auto;
+                height: 100%;
+                max-width: 100%;
+                transform-origin: top left;
+                margin: 0;
+                padding: 0;
+            }
+
+            @media (max-aspect-ratio: 1/1) {
+                .text-effect__svg--mobile {
+                    height: auto;
+                    width: 100%;
+                }
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="text-effect">
+        <!-- Десктопная версия -->
+        <svg class="text-effect__svg text-effect__svg--desktop" viewBox="0 0 1400 800" preserveAspectRatio="xMinYMin meet">
+            <defs>
+                <clipPath id="video-mask-desktop">
+                    <rect x="490" y="25" width="540" height="60"/>
+                    <rect x="350" y="125" width="335" height="60"/>
+                    <rect x="505" y="225" width="410" height="60"/>
+                    <rect x="550" y="325" width="830" height="60"/>
+                </clipPath>
+            </defs>
+
+            <!-- Фоновый слой -->
+            <rect width="100%" height="100%" fill="#1a1a1a"/>
+
+            <!-- Контентная область -->
+            <g>
+                <text class="text-content" y="80">
+                    <tspan x="20">We're here</tspan>
+                    <tspan x="1050">to make</tspan>
+                </text>
+
+                <text class="text-content" y="180">
+                    <tspan x="20">healthy</tspan>
+                    <tspan x="700">living effortless,</tspan>
+                </text>
+
+                <text class="text-content" y="280">
+                    <tspan x="20">so you can</tspan>
+                    <tspan x="930">live longer</tspan>
+                </text>
+
+                <text class="text-content" y="380">
+                    <tspan x="20">and happier</tspan>
+                </text>
+
+                <g clip-path="url(#video-mask-desktop)">
+                    <foreignObject width="100%" height="100%">
+                        <video autoplay loop muted playsinline>
+                            <source src="video.mp4" type="video/mp4">
+                        </video>
+                    </foreignObject>
+                    <rect class="video-overlay" width="100%" height="100%"/>
+                </g>
+            </g>
+        </svg>
+
+        <!-- Мобильная версия -->
+        <svg class="text-effect__svg text-effect__svg--mobile" viewBox="0 0 1000 800" preserveAspectRatio="xMinYMin meet">
+            <defs>
+                <clipPath id="video-mask-mobile">
+                    <rect x="510" y="25" width="480" height="60"/>
+                    <rect x="120" y="115" width="620" height="60"/>
+                    <rect x="20" y="205" width="360" height="60"/>
+                    <rect x="185" y="385" width="500" height="60"/>
+                    <rect x="570" y="475" width="420" height="60"/>
+                </clipPath>
+            </defs>
+
+            <!-- Фоновый слой -->
+            <rect width="100%" height="100%" fill="#1a1a1a"/>
+
+            <!-- Контентная область -->
+            <g>
+                <text class="text-content" y="80">
+                    <tspan x="20">We're here</tspan>
+                </text>
+
+                <text class="text-content" y="170">
+                    <tspan x="20">to</tspan>
+                    <tspan x="750">make</tspan>
+                </text>
+
+                <text class="text-content" y="260">
+                    <tspan x="390">healthy living</tspan>
+                </text>
+
+                <text class="text-content" y="350">
+                    <tspan x="20">effortless, so you can</tspan>
+                </text>
+
+                <text class="text-content" y="440">
+                    <tspan x="20">live</tspan>
+                    <tspan x="690">longer</tspan>
+                </text>
+
+                <text class="text-content" y="530">
+                    <tspan x="20">and happier</tspan>
+                </text>
+
+                <g clip-path="url(#video-mask-mobile)">
+                    <foreignObject width="100%" height="100%">
+                        <video autoplay loop muted playsinline>
+                            <source src="video.mp4" type="video/mp4">
+                        </video>
+                    </foreignObject>
+                    <rect class="video-overlay" width="100%" height="100%"/>
+                </g>
+            </g>
+        </svg>
+    </div>
+</body>
+</html>
